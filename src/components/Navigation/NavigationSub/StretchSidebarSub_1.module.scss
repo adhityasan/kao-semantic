@@ -1,0 +1,65 @@
+@import "~@assets/styles/color";
+
+@keyframes stretchtext {
+  from { 
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.SubOne.Active {
+  max-height: 700px;
+  transition: max-height 1000ms;
+}
+
+.SubOne {
+  overflow: hidden;
+  max-height: 0px;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  background-color: $sidebar-subone;
+  transition: max-height 500ms;
+
+  & > .SubOne_Menu {
+
+    & > a {
+      padding: 1rem 1rem 1rem calc(1rem + 10px);
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: flex-start;
+      color: $light !important;
+      transition: padding 500ms;
+      &:hover {
+        background-color: $sidebar-subone-hover;
+      }
+      &.Active {
+        padding-left: calc(1rem + 10px);
+        background-color: $sidebar-subone-active;
+        & > .SubOne_MenuIcon, .SubOne_MenuText {
+          color: $primary !important;
+        }
+      }
+
+      & > .MenuIcon {
+        color: $light !important;
+        transition: color 500ms;
+      }
+
+      & > .MenuText {
+        margin-left: 5px;
+        color: $light !important;
+        opacity: 0;
+        animation: stretchtext 500ms 1;
+        animation-fill-mode: forwards;
+        transition: color 500ms;
+      }
+    }
+  }
+}

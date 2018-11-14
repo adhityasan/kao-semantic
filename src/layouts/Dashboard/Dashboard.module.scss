@@ -1,0 +1,13 @@
+.Content {
+  margin-top: 62px;
+  height: 100%;
+  @media (min-width: 700px) {
+    margin-top: 0px;
+  }
+}
+
+@media (min-width: 700px) {
+  .Content {
+    margin-left: 13rem;
+  }
+}

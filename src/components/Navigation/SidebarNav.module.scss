@@ -1,0 +1,140 @@
+@import "~@assets/styles/color";
+@import "~@assets/styles/sizes";
+
+@keyframes stretchtext {
+  from { 
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes justifycenter {
+  from {
+    justify-content: flex-start;
+  }
+  to {
+    justify-content: center;
+  }
+}
+
+.Sizer {
+  flex: 1;
+}
+
+.childPusher {
+  color: $light !important;
+  transition: color 500ms;
+  .ChildPusherIcon {
+    padding: 0;
+    margin: 0;
+    &:hover {
+      color: $primary !important;
+    }
+  }
+}
+
+.NavStretch {
+  width: 100%;
+  height: 100%;
+  flex-wrap: nowrap;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  z-index: 90;
+
+  .NavStretch_Menu {
+    border-top: 1.3px solid $base;
+    position: relative;
+    background-color: $sidebar-menu;
+    
+    & > a {
+      padding: 1rem;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: flex-start;
+      color: $light !important;
+      transition: padding 500ms;
+      z-index: 90;
+      position: relative;
+      &:hover {
+        background-color: $sidebar-menu-hover;
+      }
+      &.Active {
+        padding-left: calc(1rem + 10px);
+        background-color: $sidebar-menu-active;
+        & > .MenuIcon, .MenuText, .childPusher {
+          color: $primary !important;
+        }
+      }
+
+      & > .MenuIcon {
+        color: $light !important;
+        transition: color 500ms;
+      }
+
+      & > .MenuText {
+        margin-left: 5px;
+        color: $light !important;
+        animation: stretchtext 500ms 1;
+        animation-fill-mode: forwards;
+        transition: color 500ms;
+      }
+    }
+  }
+}
+
+.NavShrink {
+  width: 100%;
+  height: 100%;
+  flex-wrap: nowrap;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  .NavShrink_Menu {
+    border-top: 1.3px solid $base;
+    position: relative;
+    background-color: $sidebar-menu;
+    &.Nest {
+      &:hover {
+        background-color: $sidebar-menu-nest-hover;
+        & > ul {
+          display: block;
+        }
+      }
+    }
+    &:hover {
+      background-color: $sidebar-menu-hover;
+    }
+    
+    & > a {
+      width: 100%;
+      height: 100%;
+      padding: 1rem;
+      display: flex;
+      animation: justifycenter 0s 1;
+      animation-delay: 0.5s;
+      animation-fill-mode: forwards;
+      &.Active {
+        background-color: $sidebar-menu-active;
+        .MenuIcon {
+          color: $primary !important;
+        }
+      & > .MenuText {
+          color: $primary !important;      
+        }
+      }
+
+      & > .MenuIcon {
+        color: $light !important;
+        transition: color 500ms;
+      }
+
+    }
+  }
+}

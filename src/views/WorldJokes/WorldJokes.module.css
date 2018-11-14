@@ -1,0 +1,11 @@
+.view_WorldJokers {
+  display: flex;
+  justify-content: space-around;
+  padding: 5px;
+}
+
+.JokesFilter {
+  height: 200px;
+  width: 300px;
+  background-color: rgb(0, 0, 0);
+}

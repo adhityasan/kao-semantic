@@ -1,0 +1,242 @@
+@import "~@assets/styles/color";
+@import "~@assets/styles/sizes";
+
+
+// Sidebar
+@keyframes stretch {
+  from { width: $sidebarShrinkedSize; }
+  to { width: $sidebarStretchedSize; }
+}
+@keyframes shrink {
+  from { width: $sidebarStretchedSize; }
+  to { width: $sidebarShrinkedSize; }
+}
+
+// Sidebar Itemslist Text
+@keyframes stretchtext {
+  from { 
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes shrinktext {
+  from { 
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to { 
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+}
+
+// justify Icon
+@keyframes justifycenter {
+  from {
+    justify-content: flex-start;
+  }
+  to {
+    justify-content: center;
+  }
+}
+
+.Sidebar {
+  visibility: hidden;
+  display: none;
+  opacity: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  transition: width 0.7s visibility 0s, opacity 0.5s linear;
+  @media (min-width: 768px) {
+    visibility: visible;
+    display: block;
+    opacity: 1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 70px;
+    background-color: $sidebar;
+    .NavList {
+      a {
+        justify-content: center;
+      }
+    }
+  }
+}
+
+.Stretched {
+  @media (min-width: 768px) {
+    width: 70px;
+    animation: stretch 0.5s 1;
+    animation-fill-mode: forwards;
+    .NavList {
+      a {
+        justify-content: flex-start;
+      }
+      .NavListText {
+        opacity: 0;
+        animation: stretchtext 0.5s 1;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
+}
+
+.Shrinked {
+  @media (min-width: 768px) {
+    width: 70px;
+    animation: shrink 0.5s 1;
+    animation-fill-mode: forwards;
+    .NavList {
+      a {
+        justify-content: flex-start;
+        animation: justifycenter 0s 1;
+        animation-fill-mode: forwards;
+      }
+      .NavListText {
+        animation: shrinktext 0.5s 1;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
+}
+
+.SidebarHeader {
+  width: 100%;
+  height: 70px;
+  background-color: $sidebar-header;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.SidebarLists {
+  width: 100%;
+  position: relative;
+  height: calc(100% - 170px);
+  position: absolute;
+  display: flex;
+  top: 70px;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+.ScrollableVertical {
+  overflow-y: scroll;
+}
+
+.Nav {
+  width: 100%;
+  height: 100%;
+  flex-wrap: nowrap;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.NavList {
+  white-space:nowrap;
+  border-top: 1px solid $base;
+  display: flex;
+  position: relative;
+  a {
+    color: $grey-light;
+    padding: 15px;
+    display: inherit;
+    justify-content: flex-start;
+    height: 100%;
+    width: 100%;
+    transition: all 0.4s;
+    i {
+      transition: margin 400ms, color 400ms;
+    }
+  }
+}
+
+.NavList a:hover {
+  background-color: $grey-blue;
+}
+
+.NavListActive {
+  border-left: 2px solid $primary;
+  background-color: $base;
+  .NavListText {
+    color: semantic !important;
+  }
+  i {
+    color: semantic !important;
+    margin-left: 10px;
+  }
+}
+
+.NavListText {
+  display: block;
+  margin-left: 5px;
+  opacity: 0;
+  transition: color 400ms;
+}
+
+.SidebarSizer {
+  flex: 1;
+}          
+
+.SidebarFooter {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  height: 100px;
+  background-color: $sidebar-footer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  padding-bottom: 15px;
+  z-index: 3;
+  .Avatar {
+    box-sizing: border-box !important;
+    white-space:nowrap;
+    width: 100%px;
+    height: 100%px;
+    img {
+      width: 45px !important;
+      height: 45px !important;
+    }
+  }
+  .Username {
+    color: $grey-light;
+    margin: 5px;
+    transition: width 0.5s;
+  }
+}
+
+.Stretcher {
+  visibility: hidden;
+  opacity: 0;
+  @media (min-width: 768px) {
+    visibility: visible;
+    opacity: 1;
+    position: absolute;
+    right: -18px;
+    top: 47%;
+    cursor: pointer;
+  }
+  i:before {
+    color: $primary;
+  }
+}
+
+.Stretcher:hover {
+  i {
+    color: semantic !important;
+  }
+}

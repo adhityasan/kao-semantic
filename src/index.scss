@@ -1,0 +1,13 @@
+@import "~@assets/styles/color";
+
+body {
+  background-color: $base;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  font-family: 'Quicksand', monospace;
+}
+
+::-webkit-scrollbar { 
+  display: none; 
+}

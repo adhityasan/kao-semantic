@@ -1,0 +1,35 @@
+.AuthContainer {
+  width: 100%;
+  height: 350px;
+  margin: auto;
+  padding: 10px;
+}
+
+@media (min-width: 1000px) and (min-height: 700px) {
+  .AuthContainer {
+    width: 700px;
+    height: 600px;
+  }
+}
+
+@media (min-width: 500px) and (min-height: 401px) {
+  .AuthContainer {
+    width: 500px;
+    height: 350px;
+  }
+}
+
+.AuthHeader {
+  display: flex;
+  justify-content: center;
+}
+
+.AuthSegment {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.Switcher {
+  margin-top: 10px;
+  padding: 5px;
+}

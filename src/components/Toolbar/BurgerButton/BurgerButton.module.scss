@@ -1,0 +1,228 @@
+$color: #00b5ad;		  // icon color
+$blue: #158fef;	  // background color
+$animation: 0.6s;	// animation speed
+$scale: 1;			  // icon scale 68/68 default
+$semantic: #00b5ad;
+$hovercolor: #f0f0f0;
+
+*, *:before, *:after {
+  box-sizing: border-box;
+ }
+
+.Hamburglar {
+  height: 28px;
+  width: 36px;
+  background: transparent;
+  -webkit-touch-callout: none;
+	user-select: none;
+}
+
+.Path {
+  stroke-dasharray: 240;
+  stroke-dashoffset: 240;
+  stroke-linejoin: round;
+}
+
+// All good burgers need filling!
+
+.BurgerIcon {
+  position: absolute;
+  height: 28px;
+  width: 36px;
+}
+
+.BurgerContainer {
+  cursor: pointer;    
+  position: relative;
+  height: 28px;
+  width: 36px;
+}
+
+.BurgerContainer:hover {
+  .BurgerBunTop,
+  .BurgerBunBot,
+  .BurgerFilling {
+    background: $color;
+    box-shadow: 0 0px 3px $semantic;
+  }
+}
+
+.BurgerBunTop,
+.BurgerBunBot,
+.BurgerFilling {
+  position: absolute;
+  display: block;
+  height: 4px;
+  width: 36px;
+  border-radius: 2px;
+  background: $color;
+}
+
+.BurgerBunTop {
+  top: 0;
+  transform-origin: 34px 2px;
+}
+
+.BurgerBunBot {
+  bottom: 0;
+  transform-origin: 34px 2px;
+}
+//.BurgerFilling {
+//  @include transition(all,($animation/2.5),ease-in-//out);
+//}
+// relative parent is the button
+.BurgerFilling {
+  top: 12px;
+}
+
+
+// bun animations 
+.Hamburglar.IsOpen {
+  .BurgerBunTop {
+    animation: bun-top-out $animation linear normal;
+    animation-fill-mode:forwards;
+  }
+  .BurgerBunBot {
+    animation: bun-bot-out $animation linear normal;
+    animation-fill-mode:forwards;
+  }
+}
+.Hamburglar.IsClosed {
+  .BurgerBunTop {
+    animation: bun-top-in $animation linear normal;
+    animation-fill-mode:forwards;
+  }
+  .BurgerBunBot {
+    animation: bun-bot-in $animation linear normal;
+    animation-fill-mode:forwards;
+  }
+}
+
+@keyframes bun-top-out {
+  0% {
+    left: 0;
+    top: 0;
+    transform: rotate(0deg);
+  }
+  20% {
+    left: 0;
+    top: 0;
+    transform: rotate(15deg);
+  }
+  80% {
+    left: -5px;
+    top: 0;
+    transform: rotate(-60deg);
+  }
+  100% {
+    left: -5px;
+    top: 1px;
+    transform: rotate(-45deg);
+  }
+}
+
+@keyframes bun-bot-out {
+  0% {
+    left: 0;
+    transform: rotate(0deg);
+  }
+  20% {
+    left: 0;
+    transform: rotate(-15deg);
+  }
+  80% {
+    left: -5px;
+    transform: rotate(60deg);
+  }
+  100% {
+    left: -5px;
+    transform: rotate(45deg);
+  }
+}
+
+
+@keyframes bun-top-in {
+  0% {
+    left: -5px;
+    bot: 0;
+    transform: rotate(-45deg);
+  }
+  20% {
+    left: -5px;
+    bot: 0;
+    transform: rotate(-60deg);
+  }
+  80% {
+    left: 0;
+    bot: 0;
+    transform: rotate(15deg);
+  }
+  100% {
+    left: 0;
+    bot: 1px;
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes bun-bot-in {
+  0% {
+    left: -5px;
+    transform: rotate(45deg);
+  }
+  20% {
+    left: -5px;
+    bot: 0;
+    transform: rotate(60deg);
+  }
+  80% {
+    left: 0;
+    bot: 0;
+    transform: rotate(-15deg);
+  }
+  100% {
+    left: 0;
+    transform: rotate(0deg);
+  }
+}
+
+
+// burger filling
+.Hamburglar.IsOpen {
+  .BurgerFilling {
+    animation: burger-fill-out $animation normal;
+    animation-fill-mode:forwards;
+  }
+}
+
+.Hamburglar.IsClosed {
+  .BurgerFilling {
+    animation: burger-fill-in $animation normal;
+    animation-fill-mode:forwards;
+  }
+}
+
+@keyframes burger-fill-in {
+  0% {
+    width: 0;
+    left: 36px;
+  }
+  100% {
+    width: 36px;
+    left: 0px;
+  }
+}
+
+@keyframes burger-fill-out {
+  0% {
+    width: 36px;
+    left: 0px;
+  }
+  70% {
+    width: 0;
+    left: 18px;
+  }
+  100% {
+    width: 0;
+    left: 18px;
+  }
+}

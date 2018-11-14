@@ -1,0 +1,56 @@
+$base: #252830;
+$primary:  #34bdb2;
+$secondary: #d152a7;
+$success: #75cf4b;
+$danger: #d13131;
+$warning: #dadd2e;
+$info: #31a4d1;
+$light: #dbdbdb;
+$dark: #202020;
+$white: #ffffff;
+$black: #000000;
+
+$grey: #9da0a7;
+$grey-light: lighten($grey, 25%);
+$grey-dark: darken($grey, 30%);
+
+$grey-blue: #3f4452;
+$grey-blue-light: lighten($grey-blue, 30%);
+$grey-blue-dark: darken($grey-blue, 7%);
+
+$sidebar: darken($grey-blue, 7%);
+$sidebar-header: $dark;
+$sidebar-footer: darken($grey-blue, 7%);
+
+$sidebar-menu: darken($grey-blue, 7%);;
+$sidebar-menu-active: $base;
+$sidebar-menu-hover: $grey-blue;
+$sidebar-menu-nest-hover: darken($primary, 15%);
+
+$sidebar-subone: darken($grey-blue, 1%);
+$sidebar-subone-active: $base;
+$sidebar-subone-hover: darken($primary, 10%);
+$sidebar-subone-nest-hover: darken($primary, 10%);
+
+$sidebar-subtwo: lighten($grey-blue, 5%);
+$sidebar-subtwo-active: $base;
+$sidebar-subtwo-hover: darken($primary, 5%);
+$sidebar-subtwo-nest-hover: darken($primary, 5%);
+
+$toolbar-nav-wrapper: $dark;
+$toolbar-menu: darken($grey-blue, 7%);
+$toolbar-menu-active: $base;
+$toolbar-menu-hover: $grey-blue;
+$toolbar-menu-nest-hover: darken($primary, 15%);
+
+$toolbar-nav-wrapper: $dark;
+
+$toolbar-subone-menu: lighten($dark, 3%);
+$toolbar-subone-menu-active: lighten($dark, 3%);
+$toolbar-subone-menu-hover: $grey-blue;
+$toolbar-subone-menu-nest-hover: darken($primary, 22%);
+
+$toolbar-subtwo-menu: lighten($dark, 6%);
+$toolbar-subtwo-menu-active: lighten($dark, 6%);
+$toolbar-subtwo-menu-hover: $grey-blue;
+$toolbar-subtwo-menu-nest-hover: darken($primary, 35%);

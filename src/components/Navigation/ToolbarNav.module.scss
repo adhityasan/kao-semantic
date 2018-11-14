@@ -1,0 +1,64 @@
+@import "~@assets/styles/color";
+
+.Sizer {
+  flex: 1;
+}
+
+.childPusher {
+  color: $light !important;
+  transition: color 500ms;
+  .ChildPusherIcon {
+    padding: 0;
+    margin: 0;
+    &:hover {
+      color: $primary !important;
+    }
+  }
+}
+
+.ToolbarNav {
+  width: 100%;
+  height: 100%;
+  flex-wrap: nowrap;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  z-index: 90;
+
+  & > .Toolbar_Menu {
+    border-top: 1px solid $base;
+    position: relative;
+    &.Nest {
+      &:hover {
+        background-color: $toolbar-menu-nest-hover;
+      }
+    }
+
+    & > a {
+      padding: 15px 25px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: flex-start;
+      color: $light !important;
+      transition: padding 500ms;
+      z-index: 90;
+      position: relative;
+      &:hover {
+        background-color: $toolbar-menu-hover;
+      }
+      &.Active {
+        background-color: $toolbar-menu-active;
+        padding-left: calc(25px + 10px);
+        & > .MenuIcon, .MenuText, .childPusher {
+          transition: color 500ms;
+          color: $primary !important;
+        }
+      }
+
+      & > .MenuText {
+        margin-left: 10px;
+      }
+    }
+  }
+}
