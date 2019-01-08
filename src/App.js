@@ -34,8 +34,6 @@ class App extends Component {
       }
     }
 
-    NextComponent = <Dashboard/>
-
     return (
       <div className="App">
         { NextComponent }
