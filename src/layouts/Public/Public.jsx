@@ -6,7 +6,7 @@ const DashboardLayout = () => {
   return (
     <div>
       <Switch>
-        {publiRoutes.map((conf, key) => <Route key={key} path={conf.path} component={conf.component}/>)}
+        {publiRoutes.map((conf, key) => <Route key={key} exact={conf.exact} path={conf.path} component={conf.component}/>)}
       </Switch>
     </div>
   )
