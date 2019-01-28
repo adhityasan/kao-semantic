@@ -24,8 +24,8 @@ const authSuccess = (state, payload) => {
   return updateObject(state, {
     loading: false,
     checked: true,
-    userId: payload.localId,
-    token: payload.idToken,
+    userId: payload.userId,
+    token: payload.token,
     refreshToken: payload.refreshToken,
     expiresIn: parseInt(payload.expiresIn) / 100,
     error: null

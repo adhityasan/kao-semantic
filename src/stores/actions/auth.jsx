@@ -5,8 +5,8 @@ import axios from 'axios'
 
 const authSuccess = (responseData) => {
   const expiresToken = new Date(new Date().getTime() + parseInt(responseData.expiresIn) * 1000)
-  localStorage.setItem('token', responseData.idToken)
-  localStorage.setItem('userId', responseData.localId)
+  localStorage.setItem('token', responseData.token)
+  localStorage.setItem('userId', responseData.userId)
   localStorage.setItem('expirationTime', expiresToken)
   localStorage.setItem('refreshToken', responseData.refreshToken)
   return {
@@ -57,13 +57,15 @@ export const auth = (authData, authType) => {
     const payload = {
       email: authData.email,
       password: authData.password,
-      returnSecureToken: true // to get userId token and refreshToken for re-extend expires Time login session 
+      remember: true // to get userId token and refreshToken for re-extend expires Time login session 
     }
-    const appkey = 'AIzaSyCBi-ufC3_K13zVlMYZj7_7lzIZ3hRFgzM'
-    const url = (authType === _auth.SIGN_IN) 
-      ? `https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=${appkey}`
-      : `https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=${appkey}`
 
+    // const appkey = 'AIzaSyCBi-ufC3_K13zVlMYZj7_7lzIZ3hRFgzM'
+    let url = (authType === _auth.SIGN_IN) 
+      ? 'http://localhost:5000/api/auth/login'
+      : 'http://localhost:5000/api/auth/register'
+
+    
     dispatch(authStart(authData))
 
     axios.post(url, payload)
