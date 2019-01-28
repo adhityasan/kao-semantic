@@ -17,7 +17,7 @@ import formValidate from '@utils/formValidate'
 import * as actions from '@actions'
 import { clog } from '@utils/utility'
 
-import classes from './Authentication.module.css'
+import classes from './Authentication.module.scss'
 import authForm from './formElements/formElements'
 
 class AuthenticationView extends Component {

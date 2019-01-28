@@ -3,17 +3,11 @@
   height: 350px;
   margin: auto;
   padding: 10px;
-}
-
-@media (min-width: 1000px) and (min-height: 700px) {
-  .AuthContainer {
+  @media (min-width: 1000px) and (min-height: 700px) {
     width: 700px;
     height: 600px;
   }
-}
-
-@media (min-width: 500px) and (min-height: 401px) {
-  .AuthContainer {
+  @media (min-width: 500px) and (min-height: 401px) {
     width: 500px;
     height: 350px;
   }
