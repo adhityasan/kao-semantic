@@ -7,6 +7,7 @@ import Public from '@layouts/Public/Public'
 import Dashboard from '@layouts/Dashboard/Dashboard'
 import AppLoader from '@layouts/AppLoader/AppLoader'
 import * as actions from '@actions'
+import classes from './App.module.scss'
 
 class App extends Component {
   state = {
@@ -35,7 +36,7 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
+      <div className={classes.AppComponent}>
         { NextComponent }
       </div>
     )

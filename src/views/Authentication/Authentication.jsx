@@ -9,7 +9,7 @@ import {
   Icon,
   Form,
   Header,
-  // Message
+  Label
 } from 'semantic-ui-react'
 
 import * as _auth from '@constants/authType'
@@ -68,12 +68,12 @@ class AuthenticationView extends Component {
   render() {
     let { loading } = this.props
     let { showWarning, showError } = this.state
-    
+
     return (
       <div className={classes.AuthContainer}>
-        <Header className={classes.AuthHeader} as='h2'>
-          <Icon name='users' />
-          <Header.Content>Sign in to your account</Header.Content>
+        <Header className={classes.AuthHeader} as='h2' color='teal'>
+          <Icon name='shield alternate' />
+          <Header.Content>SIGN IN TO YOUR ACCOUNT</Header.Content>
         </Header>
         <Segment className={classes.AuthSegment} padded>
           <Form loading={loading} warning={showWarning} error={showError} success={false} onSubmit={this.submitHandler}>
@@ -84,19 +84,20 @@ class AuthenticationView extends Component {
               /> */
             }
             <Form.Field>
-              <Input type="email" iconPosition='left' placeholder='Email' name="email" onChange={this.formChangeHandler}>
-                <Icon name='at' />
+              <Label as='a' icon='mail' content='click use username instead' pointing='below'/>
+              <Input type="text" iconPosition='left' placeholder='Email' onChange={this.formChangeHandler}>
                 <input />
+                <Icon name='at' />
               </Input>
             </Form.Field>
             <Form.Field>
               <Input type="password" iconPosition='left' placeholder='Password' name="password" onChange={this.formChangeHandler}>
-                <Icon name='lock' />
                 <input />
+                <Icon name='lock' />
               </Input>
             </Form.Field>
             <Divider/>
-            <Button type="submit" primary fluid>Sign in</Button>
+            <Button color='teal' type="submit" fluid>Sign In</Button>
           </Form>
           <div className={classes.Switcher}>
             Doesn&#39;t have account ? <a>Sign up here</a>
