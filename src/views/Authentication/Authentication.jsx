@@ -9,7 +9,8 @@ import {
   Icon,
   Form,
   Header,
-  Label
+  Label,
+  Message
 } from 'semantic-ui-react'
 
 import * as _auth from '@constants/authType'
@@ -25,6 +26,7 @@ class AuthenticationView extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      useUsername: false,
       authForm: authForm,
       showWarning: false,
       showError: false,
@@ -38,7 +40,11 @@ class AuthenticationView extends Component {
   submitHandler(e) {
     e.preventDefault()
     const authType = (this.state.signUpMode) ? _auth.SIGN_UP : _auth.SIGN_IN
-    const authData = { email: this.state.authForm.email.value, password: this.state.authForm.password.value }
+    const authData = { 
+      username: this.state.authForm.username.value,
+      email: this.state.authForm.email.value,
+      password: this.state.authForm.password.value 
+    }
     
     this.props.onAuth(authData, authType)
   }
@@ -77,19 +83,27 @@ class AuthenticationView extends Component {
         </Header>
         <Segment className={classes.AuthSegment} padded>
           <Form loading={loading} warning={showWarning} error={showError} success={false} onSubmit={this.submitHandler}>
+            <Message warning header='Something Went Wrong'
+              list={[ 'Email or username was not found in our system.', 'You have no group yet.' ]}
+            />
             {
-              /* <Message warning header='Could you check something!'
-              list={[ 'That e-mail has been subscribed, but you have not yet clicked the verification link in your e-mail.' ]}
-              onDismiss={() => a=false}
-              /> */
+              this.state.useUsername ?
+                <Form.Field>
+                  <Label as='a' icon='mail' content='click use email instead' pointing='below' onClick={() => this.setState({ useUsername: false })}/>
+                  <Input type="text" iconPosition='left' placeholder='Username' name="username" onChange={this.formChangeHandler}>
+                    <input />
+                    <Icon name='at' />
+                  </Input>
+                </Form.Field>
+                :
+                <Form.Field>
+                  <Label as='a' icon='mail' content='click use username instead' pointing='below' onClick={() => this.setState({ useUsername: true })}/>
+                  <Input type="text" iconPosition='left' placeholder='Email' name="email" onChange={this.formChangeHandler}>
+                    <input />
+                    <Icon name='at' />
+                  </Input>
+                </Form.Field>
             }
-            <Form.Field>
-              <Label as='a' icon='mail' content='click use username instead' pointing='below'/>
-              <Input type="text" iconPosition='left' placeholder='Email' onChange={this.formChangeHandler}>
-                <input />
-                <Icon name='at' />
-              </Input>
-            </Form.Field>
             <Form.Field>
               <Input type="password" iconPosition='left' placeholder='Password' name="password" onChange={this.formChangeHandler}>
                 <input />

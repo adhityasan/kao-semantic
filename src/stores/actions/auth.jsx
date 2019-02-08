@@ -55,6 +55,7 @@ export const setRedirectAuthPath = (pathname) => {
 export const auth = (authData, authType) => {
   return dispatch => {
     const payload = {
+      username: authData.username,
       email: authData.email,
       password: authData.password,
       remember: true // to get userId token and refreshToken for re-extend expires Time login session 

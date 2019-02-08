@@ -11,6 +11,18 @@ export const signin_formElements = {
     value: '',
     touched: false,
   },
+  username: {
+    valid: false,
+    validations: {
+      required: true,
+      minLength: 8,
+      regex: /\S+@\S+\.\S+/
+    },
+    'labelText': 'Username',
+    'HelperText': '',
+    value: '',
+    touched: false,
+  },
   password: {
     valid: false,
     validations: {
