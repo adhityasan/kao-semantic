@@ -2,15 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import {
-  Button,
   Segment,
-  Divider,
-  Input,
   Icon,
-  Form,
-  Header,
-  Label,
-  Message
+  Header
 } from 'semantic-ui-react'
 
 import * as _auth from '@constants/authType'
@@ -20,13 +14,14 @@ import { clog } from '@utils/utility'
 
 import classes from './Authentication.module.scss'
 import authForm from './formElements/formElements'
+import LoginPart from './partials/login'
 
 class AuthenticationView extends Component {
   
   constructor(props) {
     super(props)
     this.state = {
-      useUsername: false,
+      identifier: 'email',
       authForm: authForm,
       showWarning: false,
       showError: false,
@@ -35,6 +30,15 @@ class AuthenticationView extends Component {
     }
     this.formChangeHandler = this.formChangeHandler.bind(this)
     this.submitHandler = this.submitHandler.bind(this)
+    this.switchIdentifier = this.switchIdentifier.bind(this)
+  }
+
+  switchIdentifier() {
+    if (this.state.identifier === 'email') {
+      this.setState({ identifier: 'username' })
+    } else {
+      this.setState({ identifier: 'email' })
+    }
   }
 
   submitHandler(e) {
@@ -49,13 +53,13 @@ class AuthenticationView extends Component {
     this.props.onAuth(authData, authType)
   }
 
-  formChangeHandler(event) {
-    const targetName = event.currentTarget.name
+  formChangeHandler(e) {
+    const targetName = e.currentTarget.name
     const updatedAuthForm = { ...this.state.authForm }
     clog(updatedAuthForm, 'UPDATED AUTH FORM')
     clog(this.state.authForm, 'STATE AUTH FORM')
     const updatedElement = { ...updatedAuthForm[targetName] }
-    updatedElement.value = event.target.value
+    updatedElement.value = e.target.value
     updatedElement.touched = true
 
     const validity = formValidate(updatedElement)
@@ -72,9 +76,6 @@ class AuthenticationView extends Component {
   }
 
   render() {
-    let { loading } = this.props
-    let { showWarning, showError } = this.state
-
     return (
       <div className={classes.AuthContainer}>
         <Header className={classes.AuthHeader} as='h2' color='teal'>
@@ -82,39 +83,17 @@ class AuthenticationView extends Component {
           <Header.Content>SIGN IN TO YOUR ACCOUNT</Header.Content>
         </Header>
         <Segment className={classes.AuthSegment} padded>
-          <Form loading={loading} warning={showWarning} error={showError} success={false} onSubmit={this.submitHandler}>
-            <Message warning header='Something Went Wrong'
-              list={[ 'Email or username was not found in our system.', 'You have no group yet.' ]}
-            />
-            {
-              this.state.useUsername ?
-                <Form.Field>
-                  <Label as='a' icon='mail' content='click use email instead' pointing='below' onClick={() => this.setState({ useUsername: false })}/>
-                  <Input type="text" iconPosition='left' placeholder='Username' name="username" onChange={this.formChangeHandler}>
-                    <input />
-                    <Icon name='at' />
-                  </Input>
-                </Form.Field>
-                :
-                <Form.Field>
-                  <Label as='a' icon='mail' content='click use username instead' pointing='below' onClick={() => this.setState({ useUsername: true })}/>
-                  <Input type="text" iconPosition='left' placeholder='Email' name="email" onChange={this.formChangeHandler}>
-                    <input />
-                    <Icon name='at' />
-                  </Input>
-                </Form.Field>
-            }
-            <Form.Field>
-              <Input type="password" iconPosition='left' placeholder='Password' name="password" onChange={this.formChangeHandler}>
-                <input />
-                <Icon name='lock' />
-              </Input>
-            </Form.Field>
-            <Divider/>
-            <Button color='teal' type="submit" fluid>Sign In</Button>
-          </Form>
+          <LoginPart 
+            loading={this.props.loading} 
+            showError={this.state.showError} 
+            showWarning={this.state.showWarning}
+            submitHandler={this.submitHandler}
+            formChangeHandler={this.formChangeHandler}
+            identifier={this.state.identifier}
+            switchIdentifier={this.switchIdentifier}
+          />
           <div className={classes.Switcher}>
-            Doesn&#39;t have account ? <a>Sign up here</a>
+            Doesn&#39;t have account ? <a href='#'> Let&#39;s sign up</a>
           </div>
         </Segment>
       </div>
