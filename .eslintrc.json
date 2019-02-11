@@ -28,7 +28,8 @@
   },
   "plugins": [
       "react",
-      "jest"
+      "jest",
+      "react-hooks"
   ],
   "rules": {
       "indent": ["error", 2, { "SwitchCase": 1 }],
@@ -43,6 +44,7 @@
       "jest/no-focused-tests": "error",
       "jest/no-identical-title": "error",
       "jest/prefer-to-have-length": "warn",
-      "jest/valid-expect": "error"
+      "jest/valid-expect": "error",
+      "react-hooks/rules-of-hooks": "error"
   }
 }
