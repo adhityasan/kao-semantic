@@ -8,21 +8,26 @@ import {
 } from 'semantic-ui-react'
 
 import * as _auth from '@constants/authType'
+import Aux from '@hoc/Aux'
 import formValidate from '@utils/formValidate'
 import * as actions from '@actions'
 import { clog } from '@utils/utility'
 
 import classes from './Authentication.module.scss'
-import authForm from './formElements/formElements'
+import loginForm from './formElements/loginFormElements'
+import registerForm from './formElements/registerFormElements'
 import LoginPart from './partials/login'
+import RegisterPart from './partials/register'
 
 class AuthenticationView extends Component {
   
   constructor(props) {
     super(props)
     this.state = {
-      identifier: 'email',
-      authForm: authForm,
+      loginIdentifier: 'email',
+      loginForm: loginForm,
+      registerForm: registerForm,
+      activeRegisterForm: false,
       showWarning: false,
       showError: false,
       formIsValid: false,
@@ -30,24 +35,29 @@ class AuthenticationView extends Component {
     }
     this.formChangeHandler = this.formChangeHandler.bind(this)
     this.submitHandler = this.submitHandler.bind(this)
-    this.switchIdentifier = this.switchIdentifier.bind(this)
+    this.switchLoginIdentifier = this.switchLoginIdentifier.bind(this)
+    this.switchForm = this.switchForm.bind(this)
   }
 
-  switchIdentifier() {
-    if (this.state.identifier === 'email') {
-      this.setState({ identifier: 'username' })
+  switchLoginIdentifier() {
+    if (this.state.loginIdentifier === 'email') {
+      this.setState({ loginIdentifier: 'username' })
     } else {
-      this.setState({ identifier: 'email' })
+      this.setState({ loginIdentifier: 'email' })
     }
+  }
+
+  switchForm() {
+    this.setState(prevState => ({ activeRegisterForm: !prevState.activeRegisterForm }))
   }
 
   submitHandler(e) {
     e.preventDefault()
     const authType = (this.state.signUpMode) ? _auth.SIGN_UP : _auth.SIGN_IN
     const authData = { 
-      username: this.state.authForm.username.value,
-      email: this.state.authForm.email.value,
-      password: this.state.authForm.password.value 
+      username: this.state.loginForm.username.value,
+      email: this.state.loginForm.email.value,
+      password: this.state.loginForm.password.value 
     }
     
     this.props.onAuth(authData, authType)
@@ -55,10 +65,10 @@ class AuthenticationView extends Component {
 
   formChangeHandler(e) {
     const targetName = e.currentTarget.name
-    const updatedAuthForm = { ...this.state.authForm }
-    clog(updatedAuthForm, 'UPDATED AUTH FORM')
-    clog(this.state.authForm, 'STATE AUTH FORM')
-    const updatedElement = { ...updatedAuthForm[targetName] }
+    const updatedloginForm = { ...this.state.loginForm }
+    clog(updatedloginForm, 'UPDATED AUTH FORM')
+    clog(this.state.loginForm, 'STATE AUTH FORM')
+    const updatedElement = { ...updatedloginForm[targetName] }
     updatedElement.value = e.target.value
     updatedElement.touched = true
 
@@ -67,33 +77,51 @@ class AuthenticationView extends Component {
     updatedElement.helperText = validity.errorMessage
 
     let updatedFormIsValid = true
-    for (const element in updatedAuthForm) {
-      updatedFormIsValid = updatedAuthForm[element].valid && updatedFormIsValid
+    for (const element in updatedloginForm) {
+      updatedFormIsValid = updatedloginForm[element].valid && updatedFormIsValid
     }
 
-    updatedAuthForm[targetName] = updatedElement
-    this.setState({ authForm: updatedAuthForm, formIsValid: updatedFormIsValid })
+    updatedloginForm[targetName] = updatedElement
+    this.setState({ loginForm: updatedloginForm, formIsValid: updatedFormIsValid })
   }
 
   render() {
+    const headerContent = this.state.activeRegisterForm ? 'CREATE NEW ACCOUNT' : 'SIGN IN TO YOUR ACCOUNT'
+      
     return (
       <div className={classes.AuthContainer}>
         <Header className={classes.AuthHeader} as='h2' color='teal'>
           <Icon name='shield alternate' />
-          <Header.Content>SIGN IN TO YOUR ACCOUNT</Header.Content>
+          <Header.Content>{headerContent}</Header.Content>
         </Header>
         <Segment className={classes.AuthSegment} padded>
-          <LoginPart 
-            loading={this.props.loading} 
-            showError={this.state.showError} 
-            showWarning={this.state.showWarning}
-            submitHandler={this.submitHandler}
-            formChangeHandler={this.formChangeHandler}
-            identifier={this.state.identifier}
-            switchIdentifier={this.switchIdentifier}
-          />
+          {
+            this.state.activeRegisterForm
+              ?
+              <RegisterPart
+                loading={this.props.loading} 
+                showError={this.state.showError} 
+                showWarning={this.state.showWarning}
+                submitHandler={this.submitHandler}
+                formChangeHandler={this.formChangeHandler}
+              />
+              : 
+              <LoginPart 
+                loading={this.props.loading} 
+                showError={this.state.showError} 
+                showWarning={this.state.showWarning}
+                submitHandler={this.submitHandler}
+                formChangeHandler={this.formChangeHandler}
+                identifier={this.state.loginIdentifier}
+                switchLoginIdentifier={this.switchLoginIdentifier}
+              />
+          }
           <div className={classes.Switcher}>
-            Doesn&#39;t have account ? <a href='#'> Let&#39;s sign up</a>
+            {
+              this.state.activeRegisterForm 
+                ? <Aux>Already have an account ? <a href='#login' onClick={this.switchForm}>Login here</a></Aux>
+                : <Aux>Doesn&#39;t have account ? <a href='#register' onClick={this.switchForm}>Let&#39;s sign up</a></Aux>
+            }
           </div>
         </Segment>
       </div>

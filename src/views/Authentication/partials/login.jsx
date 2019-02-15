@@ -11,18 +11,18 @@ import {
 } from 'semantic-ui-react'
 
 function loginForm(props) {
-  const { loading, showWarning, showError, submitHandler, formChangeHandler, identifier, switchIdentifier } = props
+  const { loading, showWarning, showError, submitHandler, formChangeHandler, identifier, switchLoginIdentifier } = props
   let identifierField = identifier == 'email' ? 
-    ( <Form.Field>
-      <Label as='a' icon='mail' content='click to use username instead' pointing='below' onClick={() => switchIdentifier('email')} />
+    (<Form.Field>
+      <Label as='a' icon='mail' content='click to use username instead' pointing='below' onClick={() => switchLoginIdentifier('email')} />
       <Input type="text" iconPosition='left' placeholder='Email' name="email" onChange={formChangeHandler}>
         <input />
         <Icon name='at' />
       </Input>
-    </Form.Field> ) 
+    </Form.Field>) 
     :
     (<Form.Field>
-      <Label as='a' icon='mail' content='click to use email instead' pointing='below' onClick={() => switchIdentifier('username')} />
+      <Label as='a' icon='mail' content='click to use email instead' pointing='below' onClick={() => switchLoginIdentifier('username')} />
       <Input type="text" iconPosition='left' placeholder='Username' name="username" onChange={formChangeHandler}>
         <input />
         <Icon name='at' />
@@ -58,7 +58,7 @@ loginForm.propTypes = {
   showError: PropTypes.bool,
   submitHandler: PropTypes.func,
   formChangeHandler: PropTypes.func,
-  switchIdentifier: PropTypes.func,
+  switchLoginIdentifier: PropTypes.func,
   identifier: PropTypes.string
 }
 

@@ -65,7 +65,6 @@ export const auth = (authData, authType) => {
     let url = (authType === _auth.SIGN_IN) 
       ? 'http://localhost:5000/api/auth/login'
       : 'http://localhost:5000/api/auth/register'
-
     
     dispatch(authStart(authData))
 
