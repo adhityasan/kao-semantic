@@ -27,7 +27,6 @@ class AuthenticationView extends Component {
       loginIdentifier: 'email',
       loginForm: loginForm,
       registerForm: registerForm,
-      activeRegisterForm: false,
       showWarning: false,
       showError: false,
       formIsValid: false,
@@ -86,17 +85,18 @@ class AuthenticationView extends Component {
   }
 
   render() {
-    const headerContent = this.state.activeRegisterForm ? 'CREATE NEW ACCOUNT' : 'SIGN IN TO YOUR ACCOUNT'
+    const onRegisterForm = this.props.location.hash === '#register' ? true : false
+    const headerContent = onRegisterForm ? 'CREATE NEW ACCOUNT' : 'SIGN IN TO YOUR ACCOUNT'
       
     return (
       <div className={classes.AuthContainer}>
         <Header className={classes.AuthHeader} as='h2' color='teal'>
-          <Icon name='shield alternate' />
+          <Icon name={onRegisterForm ? 'user circle' : 'shield alternate' } />
           <Header.Content>{headerContent}</Header.Content>
         </Header>
         <Segment className={classes.AuthSegment} padded>
           {
-            this.state.activeRegisterForm
+            onRegisterForm
               ?
               <RegisterPart
                 loading={this.props.loading} 
@@ -118,9 +118,9 @@ class AuthenticationView extends Component {
           }
           <div className={classes.Switcher}>
             {
-              this.state.activeRegisterForm 
-                ? <Aux>Already have an account ? <a href='#login' onClick={this.switchForm}>Login here</a></Aux>
-                : <Aux>Doesn&#39;t have account ? <a href='#register' onClick={this.switchForm}>Let&#39;s sign up</a></Aux>
+              onRegisterForm 
+                ? <Aux>Already have an account ? <a href='#login'>Login here</a></Aux>
+                : <Aux>Doesn&#39;t have account ? <a href='#register'>Let&#39;s sign up</a></Aux>
             }
           </div>
         </Segment>
