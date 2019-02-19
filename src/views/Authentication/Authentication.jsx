@@ -33,9 +33,13 @@ class AuthenticationView extends Component {
       showPassword: false
     }
     this.formChangeHandler = this.formChangeHandler.bind(this)
-    this.submitHandler = this.submitHandler.bind(this)
+    this.loginSubmitHandler = this.loginSubmitHandler.bind(this)
     this.switchLoginIdentifier = this.switchLoginIdentifier.bind(this)
-    this.switchForm = this.switchForm.bind(this)
+    this.showPasswordToggler = this.showPasswordToggler.bind(this)
+  }
+
+  showPasswordToggler() {
+    this.setState(prevState => ({showPassword: !prevState.showPassword}))
   }
 
   switchLoginIdentifier() {
@@ -46,11 +50,7 @@ class AuthenticationView extends Component {
     }
   }
 
-  switchForm() {
-    this.setState(prevState => ({ activeRegisterForm: !prevState.activeRegisterForm }))
-  }
-
-  submitHandler(e) {
+  loginSubmitHandler(e) {
     e.preventDefault()
     const authType = (this.state.signUpMode) ? _auth.SIGN_UP : _auth.SIGN_IN
     const authData = { 
@@ -104,16 +104,19 @@ class AuthenticationView extends Component {
                 showWarning={this.state.showWarning}
                 submitHandler={this.submitHandler}
                 formChangeHandler={this.formChangeHandler}
+                passwordToggler={this.showPasswordToggler}
               />
               : 
               <LoginPart 
                 loading={this.props.loading} 
                 showError={this.state.showError} 
                 showWarning={this.state.showWarning}
-                submitHandler={this.submitHandler}
+                submitHandler={this.loginSubmitHandler}
                 formChangeHandler={this.formChangeHandler}
                 identifier={this.state.loginIdentifier}
-                switchLoginIdentifier={this.switchLoginIdentifier}
+                switchIdentifier={this.switchLoginIdentifier}
+                passwordToggler={this.showPasswordToggler}
+                showPassword={this.state.showPassword}
               />
           }
           <div className={classes.Switcher}>
@@ -149,7 +152,8 @@ const wrapped_connect_AuthenticationView = connect(mapStateToProps, mapDispatchT
 
 AuthenticationView.propTypes = {
   loading: PropTypes.bool,
-  onAuth: PropTypes.func
+  onAuth: PropTypes.func,
+  location: PropTypes.object
 }
 
 export default wrapped_connect_AuthenticationView

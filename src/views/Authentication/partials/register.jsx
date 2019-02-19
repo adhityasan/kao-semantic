@@ -18,25 +18,25 @@ function registerForm(props) {
         list={[ 'Email or username was not found in our system.', 'You have no group yet.' ]}
       />
       <Form.Field>
-        <Input type="text" iconPosition='left' placeholder='Email' name="email" onChange={formChangeHandler}>
+        <Input type="text" iconPosition='left' placeholder='Email' name="email" onChange={formChangeHandler} autoComplete="off">
           <input />
           <Icon name='at' />
         </Input>
       </Form.Field>
       <Form.Field>
-        <Input type="text" iconPosition='left' placeholder='Username' name="username" onChange={formChangeHandler}>
+        <Input type="text" iconPosition='left' placeholder='Username' name="username" onChange={formChangeHandler} autoComplete="off">
           <input />
-          <Icon name='at' />
+          <Icon name='user' />
         </Input>
       </Form.Field>
       <Form.Field>
-        <Input type="password" iconPosition='left' placeholder='Password' name="password" onChange={formChangeHandler}>
+        <Input type="password" iconPosition='left' placeholder='Password' name="password" onChange={formChangeHandler} autoComplete="off">
           <input />
           <Icon name='lock' />
         </Input>
       </Form.Field>
       <Form.Field>
-        <Input type="password" iconPosition='left' placeholder='Validate Password' name="validatepassword" onChange={formChangeHandler}>
+        <Input type="password" iconPosition='left' placeholder='Validate Password' name="validatepassword" onChange={formChangeHandler} autoComplete="off">
           <input />
           <Icon name='lock' />
         </Input>
