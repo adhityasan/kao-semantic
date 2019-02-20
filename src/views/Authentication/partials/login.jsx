@@ -11,11 +11,11 @@ import {
 } from 'semantic-ui-react'
 
 function loginForm(props) {
-  const { loading, showWarning, showError, submitHandler, formChangeHandler, identifier, switchIdentifier, passwordToggler, showPassword } = props
+  const { loading, showWarning, showError, submitHandler, formChangeHandler, identifier, switchIdentifier, passwordToggler, showPassword, formElements } = props
   let identifierField = identifier == 'email' ? 
     (<Form.Field>
       <Label as='a' icon='hand point right' content='click to use username instead' pointing='below' onClick={() => switchIdentifier('email')} />
-      <Input type="text" iconPosition='left' placeholder='Email' name="email" onChange={formChangeHandler} autoComplete="on">
+      <Input type="text" iconPosition='left' placeholder='Email' name="email" onChange={formChangeHandler} autoComplete="on" value={formElements.email.value}>
         <input />
         <Icon name='at' />
       </Input>
@@ -23,7 +23,7 @@ function loginForm(props) {
     :
     (<Form.Field>
       <Label as='a' icon='hand point right' content='click to use email instead' pointing='below' onClick={() => switchIdentifier('username')} />
-      <Input type="text" iconPosition='left' placeholder='Username' name="username" onChange={formChangeHandler} autoComplete="on">
+      <Input type="text" iconPosition='left' placeholder='Username' name="username" onChange={formChangeHandler} autoComplete="on" value={formElements.username.value}>
         <input />
         <Icon name='user' />
       </Input>
@@ -70,7 +70,9 @@ loginForm.propTypes = {
   formChangeHandler: PropTypes.func,
   switchIdentifier: PropTypes.func,
   identifier: PropTypes.string,
-  passwordToggler: PropTypes.func
+  passwordToggler: PropTypes.func,
+  showPassword: PropTypes.bool,
+  formElements: PropTypes.object
 }
 
 export default loginForm

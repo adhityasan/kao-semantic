@@ -10,7 +10,7 @@ import {
 } from 'semantic-ui-react'
 
 function registerForm(props) {
-  const { loading, showWarning, showError, submitHandler, formChangeHandler } = props
+  const { loading, showWarning, showError, submitHandler, formChangeHandler, formElements } = props
 
   return (
     <Form loading={loading} warning={showWarning} error={showError} success={false} onSubmit={submitHandler}>
@@ -18,13 +18,13 @@ function registerForm(props) {
         list={[ 'Email or username was not found in our system.', 'You have no group yet.' ]}
       />
       <Form.Field>
-        <Input type="text" iconPosition='left' placeholder='Email' name="email" onChange={formChangeHandler} autoComplete="off">
+        <Input type="text" iconPosition='left' placeholder='Email' name="email" onChange={formChangeHandler} autoComplete="off" value={formElements.email.value}>
           <input />
           <Icon name='at' />
         </Input>
       </Form.Field>
       <Form.Field>
-        <Input type="text" iconPosition='left' placeholder='Username' name="username" onChange={formChangeHandler} autoComplete="off">
+        <Input type="text" iconPosition='left' placeholder='Username' name="username" onChange={formChangeHandler} autoComplete="off" value={formElements.username.value}>
           <input />
           <Icon name='user' />
         </Input>
@@ -54,7 +54,8 @@ registerForm.propTypes = {
   submitHandler: PropTypes.func,
   formChangeHandler: PropTypes.func,
   switchIdentifier: PropTypes.func,
-  identifier: PropTypes.string
+  identifier: PropTypes.string,
+  formElements: PropTypes.object
 }
 
 export default registerForm
