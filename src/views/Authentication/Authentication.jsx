@@ -34,6 +34,7 @@ class AuthenticationView extends Component {
     }
     this.formChangeHandler = this.formChangeHandler.bind(this)
     this.loginSubmitHandler = this.loginSubmitHandler.bind(this)
+    this.registerSubmitHandler = this.registerSubmitHandler.bind(this)
     this.switchLoginIdentifier = this.switchLoginIdentifier.bind(this)
     this.showPasswordToggler = this.showPasswordToggler.bind(this)
   }
@@ -52,7 +53,7 @@ class AuthenticationView extends Component {
 
   loginSubmitHandler(e) {
     e.preventDefault()
-    const authType = (this.state.signUpMode) ? _auth.SIGN_UP : _auth.SIGN_IN
+    const authType = _auth.SIGN_IN
     const authData = { 
       username: this.state.loginForm.username.value,
       email: this.state.loginForm.email.value,
@@ -62,6 +63,18 @@ class AuthenticationView extends Component {
     this.props.onAuth(authData, authType)
   }
 
+  registerSubmitHandler(e) {
+    e.preventDefault()
+    const authType = _auth.SIGN_UP
+    const authData = { 
+      username: this.state.registerForm.username.value,
+      email: this.state.registerForm.email.value,
+      password: this.state.registerForm.password.value,
+      validatePassword: this.state.registerForm.validatePassword.value 
+    }
+    
+    this.props.onAuth(authData, authType)
+  }
   formChangeHandler(e) {
     const targetName = e.currentTarget.name
     const updatedloginForm = { ...this.state.loginForm }
