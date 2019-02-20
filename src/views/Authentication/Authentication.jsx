@@ -54,7 +54,7 @@ class AuthenticationView extends Component {
   loginSubmitHandler(e) {
     e.preventDefault()
     const authType = _auth.SIGN_IN
-    const authData = { 
+    const authData = {
       username: this.state.loginForm.username.value,
       email: this.state.loginForm.email.value,
       password: this.state.loginForm.password.value 
@@ -121,9 +121,11 @@ class AuthenticationView extends Component {
                 loading={this.props.loading} 
                 showError={this.state.showError} 
                 showWarning={this.state.showWarning}
-                submitHandler={this.submitHandler}
+                submitHandler={this.registerSubmitHandler}
                 formChangeHandler={this.formChangeHandler}
                 passwordToggler={this.showPasswordToggler}
+                showPassword={this.state.showPassword}
+                formElements={this.state.registerForm}
               />
               : 
               <LoginPart 
@@ -136,6 +138,7 @@ class AuthenticationView extends Component {
                 switchIdentifier={this.switchLoginIdentifier}
                 passwordToggler={this.showPasswordToggler}
                 showPassword={this.state.showPassword}
+                formElements={this.state.loginForm}
               />
           }
           <div className={classes.Switcher}>
