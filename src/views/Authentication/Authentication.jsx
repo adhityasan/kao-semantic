@@ -75,12 +75,13 @@ class AuthenticationView extends Component {
     
     this.props.onAuth(authData, authType)
   }
+
   formChangeHandler(e) {
     const targetName = e.currentTarget.name
-    const updatedloginForm = { ...this.state.loginForm }
-    clog(updatedloginForm, 'UPDATED AUTH FORM')
-    clog(this.state.loginForm, 'STATE AUTH FORM')
-    const updatedElement = { ...updatedloginForm[targetName] }
+    const updatedForm = this.props.location.hash === '#register' ? { ...this.state.registerForm } : { ...this.state.loginForm }
+    clog(this.state.Form, 'STATE AUTH FORM')
+    clog(updatedForm, 'UPDATED AUTH FORM')
+    const updatedElement = { ...updatedForm[targetName] }
     updatedElement.value = e.target.value
     updatedElement.touched = true
 
@@ -89,12 +90,17 @@ class AuthenticationView extends Component {
     updatedElement.helperText = validity.errorMessage
 
     let updatedFormIsValid = true
-    for (const element in updatedloginForm) {
-      updatedFormIsValid = updatedloginForm[element].valid && updatedFormIsValid
+    for (const element in updatedForm) {
+      updatedFormIsValid = updatedForm[element].valid && updatedFormIsValid
     }
 
-    updatedloginForm[targetName] = updatedElement
-    this.setState({ loginForm: updatedloginForm, formIsValid: updatedFormIsValid })
+    updatedForm[targetName] = updatedElement
+
+    if (this.props.location.hash === '#register') {
+      this.setState({ registerForm: updatedForm, formIsValid: updatedFormIsValid })
+    } else {
+      this.setState({ loginForm: updatedForm, formIsValid: updatedFormIsValid })
+    }
   }
 
   render() {
