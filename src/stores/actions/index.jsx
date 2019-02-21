@@ -1,5 +1,6 @@
 export { onMove } from './sampleAction'
 export {
-  auth,
+  authLogin,
+  authRegister,
   authCheckState
 } from './auth'

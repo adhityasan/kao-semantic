@@ -7,7 +7,6 @@ import {
   Header
 } from 'semantic-ui-react'
 
-import * as _auth from '@constants/authType'
 import Aux from '@hoc/Aux'
 import formValidate from '@utils/formValidate'
 import * as actions from '@actions'
@@ -53,7 +52,6 @@ class AuthenticationView extends Component {
 
   loginSubmitHandler(e) {
     e.preventDefault()
-    const authType = _auth.SIGN_IN
     const authData = {
       username: this.state.loginForm.username.value,
       email: this.state.loginForm.email.value,
@@ -61,12 +59,11 @@ class AuthenticationView extends Component {
       remember: this.state.loginForm.remember.value
     }
     
-    this.props.onAuth(authData, authType)
+    this.props.onAuthLogin(authData)
   }
 
   registerSubmitHandler(e) {
     e.preventDefault()
-    const authType = _auth.SIGN_UP
     const authData = { 
       username: this.state.registerForm.username.value,
       email: this.state.registerForm.email.value,
@@ -74,7 +71,7 @@ class AuthenticationView extends Component {
       validatePassword: this.state.registerForm.validatePassword.value 
     }
     
-    this.props.onAuth(authData, authType)
+    this.props.onAuthRegister(authData)
   }
 
   formChangeHandler(e) {
@@ -169,7 +166,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAuth: (authData, authType) => dispatch(actions.auth(authData, authType))
+    onAuthLogin: (authData) => dispatch(actions.authLogin(authData)),
+    onAuthRegister: (authData) => dispatch(actions.authRegister(authData))
   }
 }
 
@@ -178,7 +176,8 @@ const wrapped_connect_AuthenticationView = connect(mapStateToProps, mapDispatchT
 
 AuthenticationView.propTypes = {
   loading: PropTypes.bool,
-  onAuth: PropTypes.func,
+  onAuthLogin: PropTypes.func,
+  onAuthRegister: PropTypes.func,
   location: PropTypes.object
 }
 
