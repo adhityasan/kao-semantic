@@ -59,7 +59,7 @@ class AuthenticationView extends Component {
       remember: this.state.loginForm.remember.value
     }
     
-    this.props.onAuthLogin(authData)
+    this.props.onAuthLogin(authData, this.state.loginIdentifier)
   }
 
   registerSubmitHandler(e) {
@@ -166,7 +166,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAuthLogin: (authData) => dispatch(actions.authLogin(authData)),
+    onAuthLogin: (authData, identifier) => dispatch(actions.authLogin(authData, identifier)),
     onAuthRegister: (authData) => dispatch(actions.authRegister(authData))
   }
 }
