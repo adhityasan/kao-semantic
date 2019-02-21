@@ -34,6 +34,10 @@ export const signin_formElements = {
     HelperText: '',
     value: '',
     touched: false
+  },
+  remember: {
+    valid: true,
+    value: true
   }
 }
 

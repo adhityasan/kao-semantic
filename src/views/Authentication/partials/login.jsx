@@ -7,7 +7,8 @@ import {
   Icon,
   Form,
   Label,
-  Message
+  Message,
+  Checkbox
 } from 'semantic-ui-react'
 
 function loginForm(props) {
@@ -56,6 +57,7 @@ function loginForm(props) {
       />
       { identifierField }
       { passwordField }
+      <Checkbox checked={formElements.remember.value} name='remember' fitted label='Remember me' onChange={formChangeHandler} />
       <Divider/>
       <Button color='teal' type="submit" fluid>Sign in</Button>
     </Form>

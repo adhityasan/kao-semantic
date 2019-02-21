@@ -57,7 +57,8 @@ class AuthenticationView extends Component {
     const authData = {
       username: this.state.loginForm.username.value,
       email: this.state.loginForm.email.value,
-      password: this.state.loginForm.password.value 
+      password: this.state.loginForm.password.value,
+      remember: this.state.loginForm.remember.value
     }
     
     this.props.onAuth(authData, authType)
@@ -77,13 +78,16 @@ class AuthenticationView extends Component {
   }
 
   formChangeHandler(e) {
-    const targetName = e.currentTarget.name
+    const notCheckbox = !e.currentTarget.className.includes('checkbox')
+    const targetName = notCheckbox ? e.currentTarget.name : e.currentTarget.children[0].name
     const updatedForm = this.props.location.hash === '#register' ? { ...this.state.registerForm } : { ...this.state.loginForm }
-    clog(this.state.Form, 'STATE AUTH FORM')
-    clog(updatedForm, 'UPDATED AUTH FORM')
     const updatedElement = { ...updatedForm[targetName] }
-    updatedElement.value = e.target.value
+    updatedElement.value = notCheckbox ? e.target.value : !e.currentTarget.children[0].checked
     updatedElement.touched = true
+    
+    clog(targetName, 'THIS CHANGE GOES TO')
+    clog(updatedForm, 'UPDATED AUTH FORM')
+    clog(updatedElement.value, `${targetName} >> `)
 
     const validity = formValidate(updatedElement)
     updatedElement.valid = validity.isvalid
