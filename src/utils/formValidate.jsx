@@ -3,8 +3,8 @@ import * as _val from '@constants/validationType'
 const checkFormElementValidity = (updatedElement) => {
   let valid = true
   let errorMessage = ''
-  const value = updatedElement.value.trim()
-  let valueNotEmpty = value.length > 0
+  const value = typeof updatedElement.value == 'string' ? updatedElement.value.trim() : updatedElement.value
+  let valueNotEmpty = typeof updatedElement.value == 'string' ? value.length > 0 : true
 
   if (updatedElement.validations) {
     for (let validation in updatedElement.validations) {
